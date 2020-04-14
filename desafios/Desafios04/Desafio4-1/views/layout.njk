@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% block head%}
+        <title>Conteudo</title>
+        {% endblock %}
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <header>
+        {% block header %}
+            <div class="links">
+                <a href="/">Teachers</a>
+                <a href="/">Students</a>
+            </div>
+        {% endblock %}
+        </header>
+   
+        {% block section %}
+        {% endblock %}                          
+
+    </body>
+</html>
