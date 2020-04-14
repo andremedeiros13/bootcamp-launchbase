@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% block head%}
+        <title>Conteudo</title>
+        {% endblock %}
+        <link rel="stylesheet" href="styles.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+    </head>
+    <body>
+        <header>
+        {% block header %}
+            <div class="links">
+                <a href="/">Home</a>
+            </div>
+        {% endblock %}
+        </header>
+        
+        <div >
+            <h1>Cursos</h1>
+        </div>
+        {% block section %}
+        <p>sem informação</p>
+        {% endblock %}           
+        
+        <div class="modal-conteudo">
+            <div class="modal">
+                <a class="close-modal">
+                    <i class="material-icons">close</i>
+                </a>
+                <a class="open-modal">
+                    <i class="material-icons">launch</i>
+                </a>
+                <iframe src="" frameborder="0"></iframe>
+            </div>
+        </div>
+
+        
+        <div id="links-footer" class="links">
+            <a href="https://github.com/Rocketseat" target="_blank">Github</a>
+            <a href="https://www.instagram.com/rocketseat_oficial/" target="_blank">Instagram</a>
+            <a href="https://www.facebook.com/rocketseat" target="_blank">Facebook</a>
+        </div>
+
+        <script src="scripts.js"></script>
+    </body>
+</html>

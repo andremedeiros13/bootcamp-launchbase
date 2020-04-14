@@ -1,0 +1,70 @@
+    {% extends 'layout.njk' %}
+    {% block head %}
+        <title>Conteudo</title>
+     {% endblock%}
+
+        {% block header %}
+            <div class="links">
+                <a href="/">Home</a>
+                <a href="courses">Conteudo</a>
+            </div>
+        {% endblock %}
+        
+        <div >
+            <h1>Cursos</h1>
+        </div>
+
+        <section class="cards">
+            
+            <div class="card" id="starter">
+                <div  class="card_img">                    
+                    <img src="https://skylab.rocketseat.com.br/static/64c237ccff807c054339a62d53b4b402.svg" alt="starter">
+                </div>
+                <div class="content">
+                    <p>Starter</p>
+                </div>
+                <div class="card_info">
+                    <p>2 semanas</p>
+                    <p class="card_price">Free</p>
+                </div>
+            </div>
+
+            <div class="card" id="launchbase">
+                <div  class="card_img">                    
+                    <img src="https://skylab.rocketseat.com.br/static/0828532024cb46921a6b5e941f8d788d.svg" alt="launchbase">
+                </div>
+                <div class="content">
+                    <p>launchbase</p>
+                </div>
+                <div class="card_info">
+                    <p>6 semanas</p>
+                    <p class="card_price">R$1.000,00</p>
+                </div>
+            </div>
+
+            <div class="card" id="gostack">
+                <div  class="card_img">                    
+                    <img src="https://skylab.rocketseat.com.br/static/83a178a0653dab1d55e2ed7946465975.svg" alt="bootcamp">
+                </div>
+                <div class="content">
+                    <p>bootcamp</p>
+                </div>
+                <div class="card_info">
+                    <p>6 semanas</p>
+                    <p class="card_price">R$ 2.800,00</p>
+                </div>
+            </div>
+        </section>           
+        
+        <div class="modal-conteudo">
+            <div class="modal">
+                <a class="close-modal">
+                    <i class="material-icons">close</i>
+                </a>
+                <a class="open-modal">
+                    <i class="material-icons">launch</i>
+                </a>
+                <iframe src="" frameborder="0"></iframe>
+            </div>
+        </div>
+       
