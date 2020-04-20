@@ -1,6 +1,5 @@
 const express = require('express')
 const nunjucks = require('nunjucks')
-const courses = require('./data')
 const routes = require('./routes')
 
 const server = express()

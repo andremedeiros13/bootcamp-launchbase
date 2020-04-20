@@ -14,40 +14,115 @@
         background-color: var(--color-rocket);
     }
     header{
-        width: 100%;
+        background-color: white;
         padding: 32px;
-        background-color: #777;
-        text-align: center; 
-        box-sizing: border-box;       
+        text-align: center;
+        box-sizing: border-box;
     }
+
+    /*== Links/Menus==*/
     .links {
-        font-size: 32px;
-        font-weight: bold;
-    }
-    .links a {
-        text-decoration: none;
-        color: #333;
-        position: relative;
+        font-size: 22px;
+
     }
     .links a + a {
         margin-left: 32px;
     }
-    .links a:hover{
-        color: var(--color-green);
+
+    .links a {
+        text-decoration: none;
+        color: #777;
+        position: relative;
+    }
+
+    .links a.active {
+        font-weight: bold;
+        color: var(--color-rocket);
+    }
+    .links a:hover {
+        color: var(--color-rocket);
     }
     .links a::after{
         content: "";
         width: 0;
         height: 2px;
-        background-color: var(--color-rocket);
+        background-color: var(--primary-color);
         position: absolute;
         left: 0;
         bottom: -4px;
-    }
-
+        
+    }    
     .links a:hover::after{
         width: 100%;
-        transition: width 200ms ease-in-out;
+        transition: width 200ms ease-in-out ;
+        
     }
 
+    /*==CAD==*/
     
+    .card {
+        width: 800px;
+        background-color: white;
+        min-height: 40px;
+
+        /* espaçamento e alinhamento ao centro */
+
+        margin: 45px auto;
+
+        /* grid dividindo em 2 */
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
+        /* sombra */
+        box-shadow: 0px 2px 6px -2px rgba(0, 0, 0, 0.4);
+    }
+
+    /*== Details ==*/
+
+    .details {
+        padding: 32px;
+
+    }
+    .details .item {
+        padding: 16px;
+        box-shadow: 1px solid;
+    }
+
+    .details .item:last-child {
+        border: none;
+    }
+    
+    .details .item div:nth-child(1) {
+        font-size: 14px;
+        line-height: 24px;
+        color: #777;
+        letter-spacing: 0.7px;
+        font-weight: normal;
+    }
+    
+    .details .item div:nth-child(2) {
+        color: #555;
+        font-weight: bold;
+        font-size: 18px;
+    }
+    
+    .details h3{
+        text-transform: uppercase;
+        font-weight: bold;
+        color: var(--primary-color);
+    }
+    
+    /* .details .item span{
+        padding: 8px 16px;
+        background-color: var(--color-green);
+        border-radius: 16px;
+        color: #777;
+        margin-right: 4px;
+        margin-top: 8px;
+        display: inline-block;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 12px;
+    } */
+
+
