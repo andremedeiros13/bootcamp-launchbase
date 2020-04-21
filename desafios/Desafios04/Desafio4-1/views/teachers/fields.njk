@@ -1,0 +1,61 @@
+    <div class="item">
+        <div>Foto do Professor</div>
+        <div>
+            <input 
+                type="url" 
+                name="avatar_url"
+                placeholder="http://"  
+                value="{{ teacher.avatar_url }}"
+            >
+        </div>
+    </div>
+
+     <div class="item">
+        <div>Nome do Professor</div>
+        <div>
+            <input 
+                type="text" 
+                name="name"
+                placeholder="Nome do Professor" 
+                value="{{ teacher.name }}"
+            >
+        </div>
+    </div>
+
+    <div class="item">
+        <div>Data de Nascimento</div>
+        <div>
+            <input 
+                type="date"
+                name="birth" 
+                value="{{ teacher.birth }}"
+            >
+        </div>
+    </div>
+
+    <div class="item">
+        <div>Escolaridade</div>
+        <div>
+            <select name="schooling">
+                <option value="medio">Ensino Médio Completo</option>
+                <option value="superior">Ensino Superior Completo</option>
+                <option value="mestrado">Mestrado</option>
+                <option value="doutorado">Doutorado</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="item">
+        <div>area</div>
+        <div>
+            <input 
+                type="text"
+                name="area"
+                placeholder="Separe as areas por ," 
+                value="{{ teacher.area }}"
+            >
+        </div>
+        
+
+
+     <button type="submit">Salvar</button>

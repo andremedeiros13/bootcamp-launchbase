@@ -1,0 +1,44 @@
+{
+  "students": [
+    {
+      "id": 1,
+      "avatar_url": "https://images.unsplash.com/photo-1503676382389-4809596d5290?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+      "name": "Aluno 1",
+      "email": "aluno1@gmail.com",
+      "birth": 669600000000,
+      "year_schooling": "segundo",
+      "charge": 6,
+      "created_at": 1587490984396
+    },
+    {
+      "id": 2,
+      "avatar_url": "https://images.unsplash.com/photo-1571260899304-425eee4c7efc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+      "name": "Aluno 2",
+      "email": "aluno2@gmail.com",
+      "birth": 579484800000,
+      "year_schooling": "terceiro",
+      "charge": 5,
+      "created_at": 1587491017149
+    }
+  ],
+  "teachers": [
+    {
+      "id": 1,
+      "avatar_url": "https://source.unsplash.com/collection/4821422/500x500",
+      "name": "Andre Medeiros",
+      "birth": 669600000000,
+      "schooling": "medio",
+      "area": "Matemática, programação, fisica",
+      "created_at": 1587480872602
+    },
+    {
+      "id": 2,
+      "avatar_url": "https://source.unsplash.com/collection/4821422/500x500",
+      "name": "Andre Medeiros",
+      "birth": 669600000000,
+      "schooling": "mestrado",
+      "area": "Matemática, programação, fisica",
+      "created_at": 1587481416299
+    }
+  ]
+}

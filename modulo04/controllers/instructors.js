@@ -4,10 +4,6 @@ const {age, date} = require('../utils')
 
 exports.index = function(request, response){
 
-
-
-
-
     return response.render('instructors/index', {instructors: data.instructors})
 }
 

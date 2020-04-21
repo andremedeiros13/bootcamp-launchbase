@@ -1,38 +1,31 @@
 {% extends "layout.njk" %}
 
 {% block content %}
+
+<div class="card table-container">
+    <a href="/teachers/create">Novo</a>
+    <table width="100%">
+        <thead>
+            <tr>
+                <th>Professor</th>
+                <th>Acompanhamento</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+           {% for teacher in teachers %}
+                <tr>
+                    <td>
+                        <span style="background-image: url({{teacher.avatar_url}})"></span>                    
+                        {{teacher.name}}
+                    </td>
+                    <td id="container-services" >{{teacher.area}}</td>                    
+                    <td><a href="/teachers/{{teacher.id}}">Ver</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
     
-    <div class="card">
-        <section 
-            class="avatar" style="background: url(https://source.unsplash.com/collection/4821422/500x500) no-repeat center center / cover ">
-        </section>
-        <section class="details">
-            <div class="item">
-                <div>Nome</div>
-                <div>Andre Medeiros</div>
-            </div>
+</div>
 
-            <div class="item">
-                <div>Grau de escolaridade</div>
-                <div>Doutorado</div>
-            </div>
-
-            <div class="item">
-                <div>Tipo de Aula</div>
-                <div>Presencial</div>
-            </div>
-
-            <div class="item">
-                <div>Acompanhamento</div>
-                <div>Programação</div>
-            </div>
-
-            <div class="item">
-                <div>Desde</div>
-                <div>01/01/2018</div>
-            </div>
-
-        </section>
-    </div>
-
-{% endblock content %}
+{% endblock %}
