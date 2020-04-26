@@ -1,5 +1,5 @@
 module.exports = {
-    age: function(timestamp) {
+    age(timestamp) {
         const today = new Date()
         const birthDate = new Date(timestamp)
 
@@ -12,7 +12,7 @@ module.exports = {
 
         return age
     },
-    date: function(timestamp) {
+    date(timestamp) {
         const date = new Date(timestamp)
 
         const year = date.getUTCFullYear()
@@ -24,7 +24,8 @@ module.exports = {
             month,
             year,
             iso: `${year}-${month}-${day}`,
-            birthDay: `${day}/${month}`
+            birthDay: `${day}/${month}`,
+            format:`${day}/${month}/${year}`
         }
     },
     graduation(value){
@@ -33,6 +34,11 @@ module.exports = {
         else if(value == 'mestrado') return "Mestrado"        
         else if(value == 'doutorado') return "Doutorado"
     },
+    classTyp(value){
+        if(value == 'P') return "Presencial"
+        else return "A Distancia"
+    },
+
 
     studadion(value){
         if(value =="quinto") return "5º ano do ensino fundamental"

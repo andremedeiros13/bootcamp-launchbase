@@ -1,73 +1,90 @@
     <div class="item">
-        <div>Foto Aluno</div>
-        <div>
-            <input 
-                type="url" 
-                name="avatar_url"
-                placeholder="http://"  
-                value="{{ student.avatar_url }}"
-            >
-        </div>
+        <div>Aluno</div>
+            <div>
+                <input 
+                    type="url" 
+                    name="avatar_url"
+                    placeholder="http://"  
+                    value="{{ student.avatar_url }}"
+                >
+            </div>
     </div>
 
-     <div class="item">
-        <div>Nome</div>
-        <div>
-            <input 
-                type="text" 
-                name="name"
-                placeholder="Nome do Professor" 
-                value="{{ student.name }}"
-            >
-        </div>
-    </div>
     <div class="item">
-    <div>Email</div>
-        <div>
-            <input 
-                type="email"
-                name="email"
-                value="{{ student.email }}"
-            >
-        </div>
+        <div>Nome</div>
+            <div>
+                <input 
+                    type="text" 
+                    name="name"
+                    value="{{ student.name }}"
+                >
+            </div>
+    </div>
 
+    <div class="item">
+            <div>Email</div>
+            <div>
+                <input 
+                    type="email"
+                    name="email"
+                    value="{{ student.email }}"
+                >
+            </div>   
+    </div>   
+   
     <div class="item">
         <div>Data de Nascimento</div>
-        <div>
-            <input 
-                type="date"
-                name="birth" 
-                value="{{ student.birth }}"
-            >
-        </div>
+            <div>
+                <input 
+                    type="date"
+                    name="birth_date" 
+                    value="{{ student.birth_date }}"
+                >
+            </div>
     </div>
-    <div class="item">    
 
     <div class="item">
         <div>Escolaridade</div>
-        <div>
-            <select name="year_schooling">
-                <option value="quinto">5º ano do ensino fundamental</option>
-                <option value="sexto">6º ano do ensino fundamental</option>
-                <option value="setmo">7º ano do ensino fundamental</option>
-                <option value="oitavo">8º ano do ensino fundamental</option>
-                <option value="primeiro">1º ano do ensino médio</option>
-                <option value="segundo">2º ano do ensino médio</option>
-                <option value="terceiro">3º ano do ensino médio</option>
-            </select>
-        </div>
+            <div>
+                <select name="education_year">
+                    <option value="quinto">5º ano do ensino fundamental</option>
+                    <option value="sexto">6º ano do ensino fundamental</option>
+                    <option value="setmo">7º ano do ensino fundamental</option>
+                    <option value="oitavo">8º ano do ensino fundamental</option>
+                    <option value="primeiro">1º ano do ensino médio</option>
+                    <option value="segundo">2º ano do ensino médio</option>
+                    <option value="terceiro">3º ano do ensino médio</option>
+                </select>
+            </div>
     </div>
 
     <div class="item">
         <div>Carga Horaria(semanal)</div>
-        <div>
-            <input 
-                type="text"
-                name="charge"
-                placeholder="Informa o numero de aulas" 
-                value="{{ student.charge }}"
-            >
-        </div>       
+            <div>
+                <input 
+                    type="text"
+                    name="charge"
+                    placeholder="Informa o numero de aulas" 
+                    value="{{ student.charge }}"
+                >
+            </div>
+    </div>
 
+    <div class="item">
+        <div>Professor</div>
+            <div>
+                <select name="teacher">
+                    {% for teacher in teacherOptions %}
+                        <option value="{{teacher.id}}"
+                        {% if student.teacher_id == teacher.id %}
+                        selected
+                        {% endif %}
+                        >
+                            {{teacher.name}}
+                        </option>               
+                    {% endfor %}
+                </select>
+            </div>
+    </div>
 
      <button type="submit">Salvar</button>

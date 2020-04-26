@@ -27,8 +27,8 @@
         <div>
             <input 
                 type="date"
-                name="birth" 
-                value="{{ teacher.birth }}"
+                name="birth_date" 
+                value="{{ teacher.birth_date }}"
             >
         </div>
     </div>
@@ -36,7 +36,7 @@
     <div class="item">
         <div>Escolaridade</div>
         <div>
-            <select name="schooling">
+            <select name="education_level">
                 <option value="medio">Ensino Médio Completo</option>
                 <option value="superior">Ensino Superior Completo</option>
                 <option value="mestrado">Mestrado</option>
@@ -46,16 +46,40 @@
     </div>
 
     <div class="item">
-        <div>area</div>
+    <div>Tipo de Aula</div>
+    <div>
+        <span>
+            <input 
+                type="radio"
+                name="class_type"
+                value= "P"
+                {% if teacher.class_type == 'P' %}
+                    checked
+                {% endif %}
+                >Presencial
+        </span>
+        <span>
+            <input 
+                type="radio" 
+                name="class_type"
+                value='D'
+                {% if teacher.class_type == 'D' %}
+                    checked
+                {% endif %}
+                >
+            À Distância
+        </span>
+    </div>
+
+    <div class="item">
+        <div>Matérias</div>
         <div>
             <input 
                 type="text"
-                name="area"
-                placeholder="Separe as areas por ," 
-                value="{{ teacher.area }}"
+                name="subjects_taught"
+                placeholder="Separe as Matérias por ," 
+                value="{{ teacher.subjects_taught }}"
             >
         </div>
         
-
-
      <button type="submit">Salvar</button>

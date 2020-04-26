@@ -18,12 +18,12 @@
 
             <div class="item">
                 <div>Idade</div>
-                <div>{{ student.birth }}</div>
+                <div>{{ student.birth_date }}</div>
             </div>
 
             <div class="item">
                 <div>Escolaridade</div>
-                <div>{{ student.year_schooling }}</div>
+                <div>{{ student.education_year }}</div>
             </div>
 
             <div class="item">
@@ -32,7 +32,12 @@
                 
             </div>
 
-               <div class="item">
+            <div class="item">
+                <div>Professor</div>
+                <div>{{ student.teacher_name }}</div>
+            </div>
+
+            <div class="item">
                 <div>Desde</div>
                 <div>{{ student.created_at }}</div>
             </div>

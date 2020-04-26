@@ -1,38 +1,80 @@
 const { age, date, studadion } = require('../../lib/utils')
+const Student = require('../models/student')
 
 
 module.exports = {
     
     index(request, response){
-    return response.render('instructors/index')
+        Student.all(function(students){
+            return response.render('students/index', { students })
+        })
     },
 
     create(request, response){
 
-    return 
+        Student.teacherSelectOptions(function(options){
 
+            return response.render('students/create', { teacherOptions: options})
+        })
     },
 
     post(request, response){
-         
-    return    
+        const keys = Object.keys(request.body)
+
+        for(key of keys){
+            if(request.body[key] == "")
+                return response.send("Please, fill all fields!")
+        }
+
+        Student.create(request.body, function(student){
+            return response.redirect(`/students/${student.id}`)
+        })
     },
 
     show(request, response){ 
-    return 
+        Student.find(request.params.id, function(student){
+            if(!student) return response.send("Student not found!")
+
+            student.birth_date = age(student.birth_date)
+            student.created_at = date(student.created_at).format
+
+            return response.render('students/show', { student })
+        })     
     },
 
     edit(request, response){
-        return
+        Student.find(request.params.id, function(student){
+            if(!student) return response.send("Student not found!")
+            
+        student.birth_date = date(student.birth_date).iso
+        student.education_year = studadion(student.education_year)
 
+        Student.teacherSelectOptions(function(options){
+
+            return response.render('students/edit', { student, teacherOptions: options })
+        })
+
+        })
     },
 
     put(request, response){        
-        return
+        const keys = Object.keys(request.body)
+
+        for(key of keys){
+            if(request.body[key] == ""){
+                return response.send("Please, fill all fields!")
+            }
+        }
+
+        Student.update(request.body, function(){
+            return response.redirect(`/students/${request.body.id}`)
+        })
     },
 
     delete(request, response){
-        return
+        Student.delete(request.body.id, function(){
+            return response.redirect(`/students`)
+        })
     },
     
 }
@@ -121,7 +163,7 @@ module.exports = {
 //         ...foundStudent,
 //         birth: date(foundStudent.birth).iso,
 //         year_schooling: studadion(foundStudent.year_schooling),
-//         created_at: new Intl.DateTimeFormat("pt-BR").format(foundTeacher.created_at)
+//         created_at: new Intl.DateTimeFormat("pt-BR").format(foundStudent.created_at)
 //     }
 
 //     return response.render('students/edit', { student })

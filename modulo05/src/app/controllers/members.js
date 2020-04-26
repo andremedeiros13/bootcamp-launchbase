@@ -1,53 +1,65 @@
 const {age, date} = require('../../lib/utils')
+const Member = require('../models/member')
 
 
 module.exports = {
+    
     index(request, response){
-    return response.render('members/index')
+       
+        Member.all(function(members){
+            return response.render('members/index', { members })
+        })
+
     },
 
     create(request, response){
-    return response.render('members/create')
 
+        Member.instructorsSelectOptions(function(options){
+
+            return response.render('members/create', { instructorOptions: options })
+        })
     },
 
-    post(request, response){
-         
-    let { avatar_url, birth, name, services, gender } = request.body
-    
-    const keys = Object.keys(request.body)
+    post(request, response){ 
+        const keys = Object.keys(request.body)
 
-    for (key of keys){
-        if(request.body[key] =="")
-            return response.send("Please, fill all fields!")
+        for (key of keys){
+            if(request.body[key] =="")
+                return response.send("Please, fill all fields!")
     }
 
-    return
+    Member.create(request.body, function(member){
+        return response.redirect(`/members/${member.id}`)
+    })   
     
     },
 
     show(request, response){ 
-    return 
+        
+        Member.find(request.params.id, function(member){
+            if(!member) return response.send("Member not Found!")
+            
+            member.birth = date(member.birth).birthDay
+            
+            return response.render('members/show', { member })
+        })
     },
 
     edit(request, response){
-        const { id } = request.params
 
-    const foundMember = data.members.find(function(member){
-        return member.id == id
 
-    })
+        Member.find(request.params.id, function(member){
+            if(!member) return response.send("Member not Found!")
+            
+            member.birth = date(member.birth).iso
 
-    if(!foundMember){
-        return response.send("Member not found!")
-    }    
+            
+        Member.instructorsSelectOptions(function(options){
 
-    const member = {
-        ...foundMember,
-        birth: date(foundMember.birth).iso
-    }
-
-    return response.render('members/edit', { member})
+            return response.render('members/edit', { member, instructorOptions: options })
+        })           
+            
+        })        
     },
 
     put(request, response){
@@ -58,12 +70,17 @@ module.exports = {
             if(request.body[key] =="")
                 return response.send("Please, fill all fields!")
         }
+
+        Member.update(request.body, function(){
+            return response.redirect(`/members/${request.body.id}`)            
+        })
         
-        return
     },
 
     delete(request, response){
-        return
+        Member.delete(request.body.id, function(){
+            return response.redirect(`/members`)
+        })
     },
 }
 

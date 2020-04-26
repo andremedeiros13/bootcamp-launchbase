@@ -87,7 +87,7 @@ exports.edit = function(request, response){
         ...foundStudent,
         birth: date(foundStudent.birth).iso,
         year_schooling: studadion(foundStudent.year_schooling),
-        created_at: new Intl.DateTimeFormat("pt-BR").format(foundTeacher.created_at)
+        created_at: new Intl.DateTimeFormat("pt-BR").format(foundStudent.created_at)
     }
 
     return response.render('students/edit', { student })

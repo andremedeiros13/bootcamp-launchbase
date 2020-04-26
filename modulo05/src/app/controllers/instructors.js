@@ -1,53 +1,62 @@
+const Instructor = require('../models/instructor')
 const {age, date} = require('../../lib/utils')
 
 module.exports = {
-    index(request, response){
-    return response.render('instructors/index')
+    
+    index(request, response){       
+        const {filter} = request.query
+        
+        if(filter){
+            Instructor.findBy(filter, function(instructors){
+                return response.render('instructors/index', { instructors, filter })
+
+            })
+        }else{
+            Instructor.all(function(instructors){
+                return response.render('instructors/index', { instructors })
+            })
+        }
     },
 
     create(request, response){
-
     return response.render('instructors/create')
-
     },
 
-    post(request, response){
-         
-    let { avatar_url, birth, name, services, gender } = request.body
-    
-    const keys = Object.keys(request.body)
+    post(request, response){  
+        const keys = Object.keys(request.body)
 
-    for (key of keys){
-        if(request.body[key] =="")
-            return response.send("Please, fill all fields!")
-    }
+        for (key of keys){
+            if(request.body[key] =="")
+                return response.send("Please, fill all fields!")
+        }
 
-    return
-    
+        Instructor.create(request.body, function(instructor){
+            return response.redirect(`/instructors/${instructor.id}`)
+        })   
+        
     },
 
-    show(request, response){ 
-    return 
+    show(request, response){
+        
+        Instructor.find(request.params.id, function(instructor){
+            if(!instructor) return response.send("Instructor not Found!")
+            
+            instructor.age = age(instructor.birth)
+            instructor.services = instructor.services.split(",")
+            instructor.created_at = date(instructor.created_at).format
+            
+            return response.render('instructors/show', { instructor })
+        })
     },
 
     edit(request, response){
-        const { id } = request.params
-
-    const foundInstructor = data.instructors.find(function(instructor){
-        return instructor.id == id
-
-    })
-
-    if(!foundInstructor){
-        return response.send("Instructor not found!")
-    }    
-
-    const instructor = {
-        ...foundInstructor,
-        birth: date(foundInstructor.birth).iso
-    }
-
-    return response.render('instructors/edit', { instructor})
+        Instructor.find(request.params.id, function(instructor){
+            if(!instructor) return response.send("Instructor not Found!")
+            
+        instructor.birth = date(instructor.birth).format
+        
+        return response.render('instructors/edit', { instructor })
+        })        
     },
 
     put(request, response){
@@ -58,12 +67,17 @@ module.exports = {
             if(request.body[key] =="")
                 return response.send("Please, fill all fields!")
         }
+
+        Instructor.update(request.body, function(){
+            return response.redirect(`/instructors/${request.body.id}`)            
+        })
         
-        return
     },
 
     delete(request, response){
-        return
+        Instructor.delete(request.body.id, function(){
+            return response.redirect(`/instructors`)
+        })
     },
 }
 

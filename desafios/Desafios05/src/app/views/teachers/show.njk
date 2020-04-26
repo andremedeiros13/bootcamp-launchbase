@@ -6,6 +6,7 @@
         <section 
             class="avatar" style="background: url({{ teacher.avatar_url }}) no-repeat center center / cover ">
         </section>
+
         <section class="details">
             <div class="item">
                 <div>Nome</div>
@@ -14,18 +15,22 @@
 
             <div class="item">
                 <div>Idade</div>
-                <div>{{ teacher.birth }}</div>
+                <div>{{ teacher.birth_date }}</div>
             </div>
 
             <div class="item">
                 <div>Escolaridade</div>
-                <div>{{ teacher.schooling }}</div>
+                <div>{{ teacher.education_level }}</div>
+            </div>
+               <div class="item">
+                <div>Tipo de Classe</div>
+                <div>{{ teacher.class_type }}</div>
             </div>
 
             <div class="item">
-                <div>area</div>
-                {% for area in teacher.area %}
-                 <span> {{ area }}</span>
+                <div>Matérias</div>
+                {% for subjects_taught in teacher.subjects_taught %}
+                 <span> {{ subjects_taught }}</span>
                 {% endfor %}
                 
             </div>

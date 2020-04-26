@@ -3,7 +3,20 @@
 {% block content %}
 
 <div class="card table-container">
-    <a href="/teachers/create">Novo</a>
+    
+    <div class="header">
+        <a class="button" href="/students/create">Novo</a>
+        <form action="/teachers" method="GET">
+            <input 
+                type="text" 
+                name="filter"
+                placeholder="Nome ou Acompanhamento"
+                value={{filter}}
+            >
+            <button type="submit">Filtrar</button>
+        </form>
+    </div>
+    
     <table width="100%">
         <thead>
             <tr>
@@ -19,7 +32,7 @@
                         <span style="background-image: url({{teacher.avatar_url}})"></span>                    
                         {{teacher.name}}
                     </td>
-                    <td id="container-services" >{{teacher.area}}</td>                    
+                    <td id="container-services" >{{teacher.subjects_taught}}</td>                    
                     <td><a href="/teachers/{{teacher.id}}">Ver</a></td>
                 </tr>
             {% endfor %}

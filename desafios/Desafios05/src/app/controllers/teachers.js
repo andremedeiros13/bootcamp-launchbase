@@ -1,39 +1,84 @@
-const { age, date, graduation } = require('../utils')
+const { age, date, graduation, classTyp } = require('../../lib/utils')
+const Teacher = require('../models/teacher')
 
 
 
 module.exports = {
     
     index(request, response){
-    return response.render('teachers/index')
+        const {filter }  = request.query
+
+        if(filter){
+            Teacher.findBy(filter, function(teachers){
+            return response.render('teachers/index', { teachers, filter })
+
+            })
+        } else {
+            Teacher.all(function(teachers){
+            return response.render('teachers/index', { teachers })       
+        })
+    }
     },
 
     create(request, response){
-
-    return 
-
+        return response.render('teachers/create')
     },
 
     post(request, response){
-         
-    return    
+        const keys = Object.keys(request.body)
+
+        for(key of keys){
+            if(request.body[key] == "")
+                return response.send("Please, fill all fields!")
+        }
+
+        Teacher.create(request.body, function(teacher){
+            return response.redirect(`/teachers/${teacher.id}`)
+        })
     },
 
     show(request, response){ 
-    return 
+        Teacher.find(request.params.id, function(teacher){
+            if(!teacher) return response.send("Techar not found!")
+
+            teacher.birth_date = age(teacher.birth_date)
+            teacher.education_level// = graduation(teacher.education_level)
+            teacher.class_type = classTyp(teacher.class_type)
+            teacher.subjects_taught = teacher.subjects_taught.split(",")
+            teacher.created_at = date(teacher.created_at).format
+
+            return response.render('teachers/show', { teacher })
+        })     
     },
 
     edit(request, response){
-        return
+        Teacher.find(request.params.id, function(teacher){
+            if(!teacher) return response.send("Teacher not found!")
+            
+        teacher.birth_date = date(teacher.birth_date).iso
 
+        return response.render('teachers/edit', { teacher })
+        })
     },
 
     put(request, response){        
-        return
+        const keys = Object.keys(request.body)
+
+        for(key of keys){
+            if(request.body[key] == ""){
+                return response.send("Please, fill all fields!")
+            }
+        }
+
+        Teacher.update(request.body, function(){
+            return response.redirect(`/teachers/${request.body.id}`)
+        })
     },
 
     delete(request, response){
-        return
+        Teacher.delete(request.body.id, function(){
+            return response.redirect(`/teachers`)
+        })
     },
     
 }
