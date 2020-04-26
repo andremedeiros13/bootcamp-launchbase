@@ -7,7 +7,6 @@ module.exports = {
     },
 
     create(request, response){
-
     return response.render('members/create')
 
     },
