@@ -17,6 +17,7 @@
         </form>
     
     </div>
+    
     <table width="100%">
         <thead>
             <tr>
@@ -40,6 +41,13 @@
             {% endfor %}
         </tbody>
     </table>
+
+    <div class="pagination"
+        data-page={{pagination.page}}
+        data-total={{pagination.total}}    
+        data-filter={{filter}}    
+    >
+    </div>
     
 </div>
 

@@ -5,9 +5,35 @@ const Student = require('../models/student')
 module.exports = {
     
     index(request, response){
-        Student.all(function(students){
-            return response.render('students/index', { students })
-        })
+
+        let {filter, page, limit} = request.query
+
+        page = page || 1
+        limit = limit || 2
+        let offset = limit * (page - 1)
+
+        const params = {
+            filter,
+            page,
+            limit,
+            offset,
+            callback(students){
+                const pagination = {
+                    total: Math.ceil(students[0].total / limit),
+                    page
+                }
+
+                return response.render('students/index', { students, pagination, filter })
+
+            }
+        }
+
+        Student.paginate(params)
+
+
+        // Student.all(function(students){
+        //     return response.render('students/index', { students })
+        // })
     },
 
     create(request, response){
@@ -75,7 +101,7 @@ module.exports = {
         Student.delete(request.body.id, function(){
             return response.redirect(`/students`)
         })
-    },
+    }
     
 }
 
