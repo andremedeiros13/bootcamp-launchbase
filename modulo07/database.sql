@@ -39,7 +39,9 @@ CREATE TABLE "users" (
   "cep" text,
   "address" text,
   "created_at" timestamp DEFAULT (now()),
-  "updated_at" timestamp DEFAULT (now())
+  "updated_at" timestamp DEFAULT (now()),
+  "reset_token" text,
+  "reset_token_expires" text
 );
 
 -- foreign key
@@ -68,6 +70,31 @@ BEFORE UPDATE ON users
 FOR EACH ROW
 EXECUTE PROCEDURE trigger_set_timestamp();
 
-insert into categories(name) VALUES('Comida')
-insert into categories(name) VALUES('Eletrônicos')
-insert into categories(name) VALUES('Automoveis')
+
+--connect pg simple table  
+CREATE TABLE "session" (
+  "sid" varchar NOT NULL COLLATE "default",
+	"sess" json NOT NULL,
+	"expire" timestamp(6) NOT NULL
+)
+WITH (OIDS=FALSE);
+
+ALTER TABLE "session" ADD CONSTRAINT "session_pkey" PRIMARY KEY ("sid") NOT DEFERRABLE INITIALLY IMMEDIATE;
+
+CREATE INDEX "IDX_session_expire" ON "session" ("expire");
+
+-- efeito cascata ao deltar deletar usuários e produtos
+
+alter table "products"
+drop constraint products_user_id_fkey,
+add constraint products_user_id_fkey
+foreign key ("user_id")
+references "users" ("id")
+on delete cascade;
+
+alter table "files"
+drop constraint files_product_id_fkey,
+add constraint files_product_id_fkey
+foreign key ("product_id")
+references "products" ("id")
+on delete cascade;

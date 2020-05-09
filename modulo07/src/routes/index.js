@@ -21,7 +21,7 @@ routes.get('/ads/create', function(request, response){
 })
 
 routes.get('/accounts', function(request, response){
-    return response.redirect('/users/register')
+    return response.redirect('/users/login')
 })
 
 

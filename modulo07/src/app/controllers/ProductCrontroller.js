@@ -18,16 +18,18 @@ module.exports = {
     },
     async post(req, res) {
         //Logica de Salvar
-        const keys = Object.keys(req.body)
+        const keys = Object.keys(req.body)        
 
         for (key of keys){
             if(req.body[key] == "")
-            return res.send("Please, fill all fields!")
+            return res.send("Por favor, preencha todos os campos")
         }
 
         if(req.files.length == 0)
-            return res.send('Please, send al leaste one image')        
-                
+            return res.send('Selecione pelo menos uma imagem')        
+        
+        req.body.user_id = req.session.userId
+
         let results = await Product.create(req.body)
         const productId = results.rows[0].id
         
