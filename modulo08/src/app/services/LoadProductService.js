@@ -15,7 +15,7 @@ async function getImages(productId) {
 
 async function format(product) {
     const files = await getImages(product.id)
-    product.img = files.src//files[0].src
+    product.img = files[0].src
     product.files = files
     product.formatOldPrice = formatPrice(product.old_price)
     product.formatPrice = formatPrice(product.price)
@@ -50,6 +50,15 @@ const LoadService = {
             const productsPromise = products.map(format)
 
             return Promise.all(productsPromise)
+            
+        } catch (error) {
+            console.error(error)            
+        }
+    },
+    async productWithDeleted(){
+        try {
+            let product = await Product.findOneWithDeleted(this.filter)
+            return format(product)
             
         } catch (error) {
             console.error(error)            

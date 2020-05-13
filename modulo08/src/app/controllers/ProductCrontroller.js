@@ -39,7 +39,7 @@ module.exports = {
             const filePromise = req.files.map(file =>
                 File.create({
                     name: file.filename,
-                    path: file.path.replace(/\\/g, "/"),
+                    path: file.path,
                     product_id,
                 }))
 
